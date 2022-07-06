@@ -6,56 +6,44 @@ import random
 import re
 import sys
 
-# Complete the 'divisibleSumPairs' function below.        
-    # The function is expected to return an INTEGER.
-    # The function accepts following parameters:
-    #  1. INTEGER n -> Length of ar    
-    #  2. INTEGER k -> Number     
-    #  3. INTEGER_ARRAY -> 
+# PROBLEM: Given an array of integers and a positive integer , determine the number of pairs where and + is divisible by . 
+# https://www.hackerrank.com/challenges/divisible-sum-pairs/problem?isFullScreen=true
+
+# GOAL: Return the number of pairs(i,j) that meet the following criteria:
+        # Criteria (1): i < j 
+        # Criteria (2): The sum of the pairs is divisible by k 
+            # --> (ar[i] + ar[j]) % k  == 0
     
-    # GOAL: Return the number of pairs (i, j) that meet the following criteria:
-        # (1) i < j 
-        # (2) The sum of the pairs is divisible by k 
-            # --> ar[i] + ar[j]) % k  == 0
-    # EXAMPLE 1: 
-    # ==== INPUTS ===== #
+# =====  EXAMPLE PROBLEM (1)  ===== #
+    # ==== INPUTS === #
         # n = 6
         # k = 3
         # ar = [1, 3, 2, 6, 1, 2]
-    # APPROACH
-        # (*) Sort array in ascending order 
-        # (*) Use a nested for-loop to generate every possible combination of pairs in the array
-        # for i in range(0, len(ar)-1):
-            # for j in range(i+1, len(ar)):
-            #  if (i < j) and (sum(i,j) % k) == 0
-            
+    # === OUTPUT === #
+        # result = 3 -->  Three pairs meet the criteria: [1,4], [2,3], [4,6]
 
-def divisibleSumPairs(n, k, ar):
+# === SOLUTION === #
+# STEP 1: Use a 'count' variable to keep track of valid pairs
+# STEP 2: Use a nested for-loop to generate every possible combination of pairs in the array
+# STEP 3: For each pair, check if they meet the following criteria:
+    # (1): i < j 
+    # (2): The sum of the pairs is divisible by k 
+    # --> (ar[i] + ar[j]) % k  == 0
+
+# STEP 3: If a pair meets both conditions, increment the count by 1
+
+def divisibleSumPairs(k, ar):
     count = 0
-    for i in range(n):
-        for j in range(i+1, n):
+    for i in range(len(ar)):
+        for j in range(i+1, len(ar)):
             pair = ar[i:j+1]
-            print("Pair:")
             p_sum = sum(pair)
             if (pair[0] < pair[1]) and (p_sum % k == 0):
-                count += 1
-                
-    return count
-                
+                count += 1                
+    return count                
 
 if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
-
-    first_multiple_input = input().rstrip().split()
-
-    n = int(first_multiple_input[0])
-
-    k = int(first_multiple_input[1])
-
-    ar = list(map(int, input().rstrip().split()))
-
-    result = divisibleSumPairs(n, k, ar)
-
-    fptr.write(str(result) + '\n')
-
-    fptr.close()
+    input_arr = [1, 3, 2, 6, 1, 2]
+    k = 5 # Divide (ar[i] + ar[j) by 'k' value 
+    result = divisibleSumPairs(k, input_arr)
+    

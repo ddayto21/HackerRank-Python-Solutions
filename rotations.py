@@ -35,5 +35,6 @@ for i in range(3):
     input_arr = shift_left(input_arr)
     print(f"Rotation {i}: {input_arr}")
 
+
     
     
