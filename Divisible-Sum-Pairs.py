@@ -32,6 +32,7 @@ import sys
 
 # STEP 3: If a pair meets both conditions, increment the count by 1
 
+
 def divisibleSumPairs(k, ar):
     count = 0
     for i in range(len(ar)):
